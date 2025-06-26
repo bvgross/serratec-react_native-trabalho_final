@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from "react-native";
 import iconeLogin from "../../assets/iconesLogin/iconeLogin.png";
 import iconeLoginSenha from "../../assets/iconesLogin/iconeLoginSenha.png";
@@ -16,10 +16,10 @@ type Props = {
 
 const RegisterForm = ({ registerType, loading }: Props) => {
   const [nome, setNome] = useState("");
-  const [email, setEmail] = useState("");
-  const [dataNascimento, setDataNascimento] = useState("");
-  const [nacionalidade, setNacionalidade] = useState("");
   const [senha, setSenha] = useState("");
+  const [email, setEmail] = useState("");
+  const [data_nascimento, setData_nascimento] = useState("");
+  const [nacionalidade, setNacionalidade] = useState("");
 
   return (
     <LinearGradient
@@ -28,6 +28,7 @@ const RegisterForm = ({ registerType, loading }: Props) => {
       end={{ x: 0.8, y: 0 }}
       style={styles.container}
     >
+      {/* nome, senha, email, data_nascimento, nacionalidade,  */}
       <View style={stylesCadastro.formContainer}>
         <Text style={stylesCadastro.title}>Registre-se</Text>
         <View style={{ ...styles.inputRow, ...stylesCadastro }}>
@@ -38,6 +39,17 @@ const RegisterForm = ({ registerType, loading }: Props) => {
             placeholderTextColor={styles.corPlaceHolder.color}
             value={nome}
             onChangeText={setNome}
+          />
+        </View>
+        <View style={styles.inputRow}>
+          <Image source={iconeLoginSenha} style={styles.inputIcon} />
+          <TextInput
+            style={styles.input}
+            placeholder="Senha"
+            placeholderTextColor={styles.corPlaceHolder.color}
+            value={senha}
+            onChangeText={setSenha}
+            secureTextEntry
           />
         </View>
         <View style={styles.inputRow}>
@@ -57,8 +69,8 @@ const RegisterForm = ({ registerType, loading }: Props) => {
             style={styles.input}
             placeholder="Data de Nascimento"
             placeholderTextColor={styles.corPlaceHolder.color}
-            value={dataNascimento}
-            onChangeText={setDataNascimento}
+            value={data_nascimento}
+            onChangeText={setData_nascimento}
           />
         </View>
         <View style={styles.inputRow}>
@@ -71,23 +83,12 @@ const RegisterForm = ({ registerType, loading }: Props) => {
             onChangeText={setNacionalidade}
           />
         </View>
-        <View style={styles.inputRow}>
-          <Image source={iconeLoginSenha} style={styles.inputIcon} />
-          <TextInput
-            style={styles.input}
-            placeholder="Senha"
-            placeholderTextColor={styles.corPlaceHolder.color}
-            value={senha}
-            onChangeText={setSenha}
-            secureTextEntry
-          />
-        </View>
         <Text style={styles.bottomText}>
           Tem uma conta ? <Text style={stylesCadastro.loginLink}>Entrar</Text>
         </Text>
         <TouchableOpacity
           style={stylesCadastro.registerButton}
-          onPress={() => registerType(nome, email, dataNascimento, nacionalidade, senha)}
+          onPress={() => registerType(nome, senha, email, data_nascimento, nacionalidade)}
           disabled={loading}
         >
           <Text style={stylesCadastro.registerButtonText}>{loading ? "Registrando..." : "Registrar"}</Text>
