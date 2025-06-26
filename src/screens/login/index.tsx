@@ -7,17 +7,17 @@ import { LinearGradient } from "expo-linear-gradient";
 const Login = () => {
   const [loading, setLoading] = useState(false);
 
-  const Login = async (username: string, password: string) => {
+  const Login = async (email: string, senha: string) => {
     setLoading(true);
     try {
-      const response = await fetch("", {
+      const response = await fetch("https://681cefc3f74de1d219ae5154.mockapi.io/api/v1/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ email, senha }),
       });
       const data = await response.json();
       if (response.ok) {
-        Alert.alert("Login realizado!", `Bem-vindo, ${data.user || username}!`);
+        Alert.alert("Login realizado!", `Bem-vindo, ${data.user || email}!`);
       } else {
         Alert.alert("Erro", data.message || "Usuário ou senha inválidos");
       }

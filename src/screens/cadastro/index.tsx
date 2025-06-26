@@ -15,7 +15,7 @@ const Cadastro = () => {
   ) => {
     setLoading(true);
     try {
-      const response = await fetch("", {
+      const response = await fetch("https://681cefc3f74de1d219ae5154.mockapi.io/api/v1/users", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nome, senha, email, dataAniversario, nacionalidade }),
