@@ -12,9 +12,10 @@ const Cadastro = () => {
     senha: string,
     email: string,
     data_nascimento: string,
-    nacionalidade: string
+    nacionalidade: string,
+    pontuacao: number
   ) => {
-    postUsers({ nome, senha, email, data_nascimento, nacionalidade });
+    postUsers({ nome, senha, email, data_nascimento, nacionalidade, pontuacao });
     // setLoading(true);
     // try {
     //   const response = await fetch("https://681cefc3f74de1d219ae5154.mockapi.io/api/v1/users", {
