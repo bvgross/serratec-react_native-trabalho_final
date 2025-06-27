@@ -4,7 +4,7 @@ import LoginForm from "../../components/loginForm/LoginForm";
 import styles from "../../../styles";
 import { LinearGradient } from "expo-linear-gradient";
 
-const Login = () => {
+export const Login = () => {
   const [loading, setLoading] = useState(false);
 
   // const Login = async (email: string, senha: string) => {
@@ -43,4 +43,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+
