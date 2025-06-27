@@ -7,25 +7,25 @@ import { LinearGradient } from "expo-linear-gradient";
 const Login = () => {
   const [loading, setLoading] = useState(false);
 
-  const Login = async (email: string, senha: string) => {
-    setLoading(true);
-    try {
-      const response = await fetch("https://681cefc3f74de1d219ae5154.mockapi.io/api/v1/users", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, senha }),
-      });
-      const data = await response.json();
-      if (response.ok) {
-        Alert.alert("Login realizado!", `Bem-vindo, ${data.user || email}!`);
-      } else {
-        Alert.alert("Erro", data.message || "Usuário ou senha inválidos");
-      }
-    } catch (err) {
-      Alert.alert("Erro", "Não foi possível conectar à API");
-    }
-    setLoading(false);
-  };
+  // const Login = async (email: string, senha: string) => {
+  //   setLoading(true);
+  //   try {
+  //     const response = await fetch("https://681cefc3f74de1d219ae5154.mockapi.io/api/v1/users", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ email, senha }),
+  //     });
+  //     const data = await response.json();
+  //     if (response.ok) {
+  //       Alert.alert("Login realizado!", `Bem-vindo, ${data.nome}!`);
+  //     } else {
+  //       Alert.alert("Erro", data.message || "Usuário ou senha inválidos");
+  //     }
+  //   } catch (err) {
+  //     Alert.alert("Erro", "Não foi possível conectar à API");
+  //   }
+  //   setLoading(false);
+  // };
 
   return (
     <>
@@ -36,7 +36,7 @@ const Login = () => {
         style={styles.container}
       >
         <View style={styles.container}>
-          <LoginForm loginType={Login} loading={loading} />
+          <LoginForm loginType={Login} />
         </View>
       </LinearGradient>
     </>
