@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Switch, Image } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Switch, Image, Alert } from "react-native";
 import styles from "../../../styles";
 import iconeLogin from "../../assets/iconesLogin/iconeLogin.png";
 import iconeLoginSenha from "../../assets/iconesLogin/iconeLoginSenha.png";
 import { checkLogin } from "../../services/usuarios";
+import { getData } from "../../utils/asyncStorage";
+import { useNavigation } from "@react-navigation/native";
+
 //typescript
 type Props = {
   loginType: (nome: string, senha: string) => void;
@@ -14,11 +17,34 @@ const LoginForm = ({ loginType }: Props) => {
   const [remember, setRemember] = useState(false);
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const handlePress = (email: string, senha: string) => {
+  const navigation = useNavigation();
+
+  // const handlePress = async () => {
+  //   if (!validateInputs()) return;
+  //   setLoading(true);
+  //   const success = await checkLogin(email, senha);
+  //   if (success) {
+  //     if (remember) await AsyncStorage.setItem('savedEmail', email);
+  //     navigation.navigate('home' as never);
+  //   } else {
+  //     Alert.alert('Erro', 'Email ou senha incorretos.');
+  //   }
+  //   setLoading(false);
+  // };
+
+  const handlePress = async (email: string, senha: string) => {
     setLoading(true);
-    checkLogin(email, senha);
+    await checkLogin(email, senha);
     setLoading(false);
-  };
+
+    const autorizado = await getData("acessoAutorizado");
+    if (autorizado === "OK") {
+      navigation.navigate("home" as never);
+    } else {
+      Alert.alert("Erro", "Usuário não autorizado.");
+    }
+
+  }
 
   return (
     <>
@@ -61,7 +87,10 @@ const LoginForm = ({ loginType }: Props) => {
         <Text style={styles.loginButtonText}>{loading ? "Entrando..." : "Entrar"}</Text>
       </TouchableOpacity>
       <Text style={styles.bottomText}>
-        Não tem conta? <Text style={styles.register}>Registrar agora</Text>
+        Não tem conta?
+        <TouchableOpacity onPress={() => navigation.navigate("cadastro" as never)}>
+          <Text style={styles.register}>Registrar agora</Text>
+        </TouchableOpacity >
       </Text>
     </>
   );

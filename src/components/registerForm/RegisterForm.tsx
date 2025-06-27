@@ -10,7 +10,7 @@ import { stylesCadastro } from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
 
 type Props = {
-  registerType: (nome: string, email: string, dataNascimento: string, nacionalidade: string, senha: string) => void;
+  registerType: (nome: string, email: string, dataNascimento: string, nacionalidade: string, senha: string, pontuacao: number) => void;
   loading: boolean;
 };
 
@@ -20,6 +20,8 @@ const RegisterForm = ({ registerType, loading }: Props) => {
   const [email, setEmail] = useState("");
   const [data_nascimento, setData_nascimento] = useState("");
   const [nacionalidade, setNacionalidade] = useState("");
+  // const [pontuacao, setPontuacao] = useState(0);
+  const pontuacao = 0;
 
   return (
     <LinearGradient
@@ -88,7 +90,7 @@ const RegisterForm = ({ registerType, loading }: Props) => {
         </Text>
         <TouchableOpacity
           style={stylesCadastro.registerButton}
-          onPress={() => registerType(nome, senha, email, data_nascimento, nacionalidade)}
+          onPress={() => registerType(nome, senha, email, data_nascimento, nacionalidade, pontuacao)}
           disabled={loading}
         >
           <Text style={stylesCadastro.registerButtonText}>{loading ? "Registrando..." : "Registrar"}</Text>
