@@ -3,16 +3,22 @@ import { View, Text, TextInput, TouchableOpacity, Switch, Image } from "react-na
 import styles from "../../../styles";
 import iconeLogin from "../../assets/iconesLogin/iconeLogin.png";
 import iconeLoginSenha from "../../assets/iconesLogin/iconeLoginSenha.png";
+import { checkLogin } from "../../services/usuarios";
 //typescript
 type Props = {
   loginType: (nome: string, senha: string) => void;
-  loading: boolean;
 };
 
-const LoginForm = ({ loginType, loading }: Props) => {
+const LoginForm = ({ loginType }: Props) => {
+  const [loading, setLoading] = useState(false);
   const [remember, setRemember] = useState(false);
-  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+  const handlePress = (email: string, senha: string) => {
+    setLoading(true);
+    checkLogin(email, senha);
+    setLoading(false);
+  };
 
   return (
     <>
@@ -23,8 +29,8 @@ const LoginForm = ({ loginType, loading }: Props) => {
             style={styles.input}
             placeholder="E-mail"
             placeholderTextColor="#bfc4c9"
-            value={nome}
-            onChangeText={setNome}
+            value={email}
+            onChangeText={setEmail}
           />
         </View>
         <View style={styles.inputRow}>
@@ -51,7 +57,7 @@ const LoginForm = ({ loginType, loading }: Props) => {
           trackColor={{ false: "#ccc", true: "#bfc4c9" }}
         />
       </View>
-      <TouchableOpacity style={styles.loginButton} onPress={() => loginType(nome, senha)} disabled={loading}>
+      <TouchableOpacity style={styles.loginButton} onPress={() => handlePress(email, senha)} disabled={loading}>
         <Text style={styles.loginButtonText}>{loading ? "Entrando..." : "Entrar"}</Text>
       </TouchableOpacity>
       <Text style={styles.bottomText}>

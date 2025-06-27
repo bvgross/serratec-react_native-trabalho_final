@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { Alert } from "react-native";
+import { getData, storeData } from "../../utils/asyncStorage";
 
 const apiUsers = axios.create({
   baseURL: "https://681cefc3f74de1d219ae5154.mockapi.io/api/v1/",
@@ -32,27 +33,43 @@ export const postUsers = async (user: UserProps) => {
     Alert.alert("Todos os campos devem ser preenchidos!");
     return;
   }
-  const emailExiste = await checkEmail(user);
-  if (emailExiste) {
-    Alert.alert("Email já cadastrado!");
-    return;
-  }
+
   try {
+    const emailExiste = await checkEmail(user);
+    if (emailExiste) {
+      Alert.alert("Email já cadastrado!");
+      return;
+    }
     const response = await apiUsers.post("users", user);
     console.log("usuario cadastrado", response.data);
     Alert.alert("Usuário cadastrado com sucesso! Seja bem vindo,");
   } catch (error) {
     console.error("erro ao cadastrar:", error);
 
-    Alert.alert("erro ao cadastrar usuario");
+    Alert.alert("erro ao cadastrar usuário");
   }
 };
 
-export function getUsers(): Promise<AxiosResponse<any, any>> {
-  const url = "users";
+export const checkLogin = async (email: string, senha: string) => {
+  const url = "users?email=" + email;
+  console.log("dados inseridos", email, senha);
 
-  return apiUsers.get(url);
-}
+  try {
+    const { data } = await apiUsers.get(url);
+
+    if (data[0].senha === senha) {
+      await storeData("nome", data[0].nome);
+      await storeData("id", data[0].id);
+
+      Alert.alert("Login realizado!", `Bem-vindo, ${await getData("nome")}!`);
+    } else {
+      Alert.alert("Email ou senha inválidos!");
+    }
+  } catch (error) {
+    console.error("Erro ao verificar e-mail:", error);
+    return false; // Em caso de erro, não impede o cadastro
+  }
+};
 
 export const checkEmail = async (user: UserProps) => {
   const url = "users?email=" + user.email;
@@ -65,31 +82,3 @@ export const checkEmail = async (user: UserProps) => {
     return false; // Em caso de erro, não impede o cadastro
   }
 };
-//   return false;
-
-//   return apiUsers.get(url);
-
-// export interface getMagicItemDetailsResponse {
-//   index: string;
-//   name: string;
-//   equipment_category: EquipmentCategory;
-//   rarity: Rarity;
-//   variants?: any[] | null;
-//   variant: boolean;
-//   desc?: string[] | null;
-// }
-
-// interface EquipmentCategory {
-//   index: string;
-//   name: string;
-//   url: string;
-// }
-
-// interface Rarity {
-//   name: string;
-// }
-
-// export function getMagicItemsDetails(index: string): Promise<AxiosResponse<getMagicItemDetailsResponse, any>> {
-//   const url = "magic-items/" + index;
-
-//   return apiMagicItems.get(url);
