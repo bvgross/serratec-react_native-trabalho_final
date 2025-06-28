@@ -13,7 +13,6 @@ import cadastro from "./src/screens/cadastro"
 import home from "./src/screens/home"
 import { BottomTabs } from './src/routes/BottomTabs';
 
-
 const Stack = createNativeStackNavigator();
 
 export default function App() {
