@@ -5,10 +5,13 @@ import iconeLoginSenha from "../../assets/iconesLogin/iconeLoginSenha.png";
 import emailicon from "../../assets/iconesCadastro/emailicon.png";
 import calender from "../../assets/iconesCadastro/calender.png";
 import nacionalidadeIcon from "../../assets/iconesCadastro/nacionalidade.png";
-import styles from "../../../styles";
-import { stylesCadastro } from "./styles";
+
 import { LinearGradient } from "expo-linear-gradient";
+
+import { styles } from "./styles";
+
 import { useNavigation } from "@react-navigation/native";
+
 
 type Props = {
   registerType: (nome: string, email: string, dataNascimento: string, nacionalidade: string, senha: string, pontuacao: number) => void;
@@ -25,16 +28,10 @@ const RegisterForm = ({ registerType, loading }: Props) => {
   const navigation = useNavigation();
 
   return (
-    <LinearGradient
-      colors={["#404040", "#666D73"]}
-      start={{ x: 1, y: 0.6 }}
-      end={{ x: 0.8, y: 0 }}
-      style={styles.container}
-    >
-      {/* nome, senha, email, data_nascimento, nacionalidade,  */}
-      <View style={stylesCadastro.formContainer}>
-        <Text style={stylesCadastro.title}>Registre-se</Text>
-        <View style={{ ...styles.inputRow, ...stylesCadastro }}>
+    <>
+      <Text style={styles.title}>Registre-se</Text>
+      <View style={styles.formContainer}>
+        <View style={{ ...styles.inputRow, ...styles }}>
           <Image source={iconeLogin} style={styles.inputIcon} />
           <TextInput
             style={styles.input}
@@ -95,14 +92,14 @@ const RegisterForm = ({ registerType, loading }: Props) => {
           </TouchableOpacity>
         </Text>
         <TouchableOpacity
-          style={stylesCadastro.registerButton}
+          style={styles.registerButton}
           onPress={() => registerType(nome, senha, email, data_nascimento, nacionalidade, pontuacao)}
           disabled={loading}
         >
-          <Text style={stylesCadastro.registerButtonText}>{loading ? "Registrando..." : "Registrar"}</Text>
+          <Text style={styles.registerButtonText}>{loading ? "Registrando..." : "Registrar"}</Text>
         </TouchableOpacity>
       </View>
-    </LinearGradient>
+    </>
   );
 };
 
