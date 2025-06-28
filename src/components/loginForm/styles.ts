@@ -1,14 +1,6 @@
 import { CurrentRenderContext } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-
-    backgroundColor: "#404040",
-    marginTop: 0,
-  },
   dividerRow: {
     flexDirection: "row",
     alignItems: "center",
@@ -17,9 +9,9 @@ const styles = StyleSheet.create({
   },
 
   loginContainer: {
-    flex: 1,
     justifyContent: "center",
     width: "100%",
+    height: 400,
     padding: 24,
     backgroundColor: "transparent",
     gap: 15,
