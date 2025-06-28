@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from "react-native";
+import React, { useState } from "react";
+import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
 import iconeLogin from "../../assets/iconesLogin/iconeLogin.png";
 import iconeLoginSenha from "../../assets/iconesLogin/iconeLoginSenha.png";
 import emailicon from "../../assets/iconesCadastro/emailicon.png";
@@ -8,6 +8,7 @@ import nacionalidadeIcon from "../../assets/iconesCadastro/nacionalidade.png";
 import styles from "../../../styles";
 import { stylesCadastro } from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from "@react-navigation/native";
 
 type Props = {
   registerType: (nome: string, email: string, dataNascimento: string, nacionalidade: string, senha: string, pontuacao: number) => void;
@@ -20,8 +21,8 @@ const RegisterForm = ({ registerType, loading }: Props) => {
   const [email, setEmail] = useState("");
   const [data_nascimento, setData_nascimento] = useState("");
   const [nacionalidade, setNacionalidade] = useState("");
-  // const [pontuacao, setPontuacao] = useState(0);
   const pontuacao = 0;
+  const navigation = useNavigation();
 
   return (
     <LinearGradient
@@ -86,7 +87,12 @@ const RegisterForm = ({ registerType, loading }: Props) => {
           />
         </View>
         <Text style={styles.bottomText}>
-          Tem uma conta ? <Text style={stylesCadastro.loginLink}>Entrar</Text>
+          Tem uma conta ?
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Login" as never)}
+          >
+            <Text style={stylesCadastro.loginLink}>Entrar</Text>
+          </TouchableOpacity>
         </Text>
         <TouchableOpacity
           style={stylesCadastro.registerButton}

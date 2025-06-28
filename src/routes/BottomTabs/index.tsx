@@ -3,17 +3,17 @@ import { Image } from 'react-native';
 import CartIcon from '../../assets/iconesNavigator/CartIcon.png';
 import ShopIcon from '../../assets/iconesNavigator/CartIcon.png';
 import SkillIcon from '../../assets/iconesNavigator/CartIcon.png';
-import { Login } from '../../screens/login'
-import cadastro from '../../screens/cadastro'
-import home from '../../screens/home'
+import { Login } from '../../screens/login';
+import { Cadastro } from '../../screens/cadastro';
+import { Home } from '../../screens/home';
 
 const Tab = createBottomTabNavigator<BottomTabsParamList>();
 
 export type BottomTabsParamList = {
   Login: undefined;
-  cadastro: undefined;
-  home: undefined;
-}
+  Cadastro: undefined;
+  Home: undefined;
+};
 
 export function BottomTabs() {
   return (
@@ -26,8 +26,8 @@ export function BottomTabs() {
       }}
     >
       <Tab.Screen
-        name="home"
-        component={home}
+        name="Home"
+        component={Home}
         options={{
           tabBarIcon: ({ color }) => (
             <Image
@@ -39,8 +39,8 @@ export function BottomTabs() {
         }}
       />
       <Tab.Screen
-        name="cadastro"
-        component={cadastro}
+        name="Cadastro"
+        component={Cadastro}
         options={{
           tabBarIcon: ({ color }) => (
             <Image

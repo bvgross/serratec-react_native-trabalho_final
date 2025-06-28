@@ -15,11 +15,6 @@ export interface UserProps {
   pontuacao: number;
 }
 
-// interface MagicItemResponse {
-//   count: number;
-//   results: MagicItemProps[];
-// }
-
 export const postUsers = async (user: UserProps) => {
   const url = "users";
 
@@ -59,7 +54,6 @@ export const checkLogin = async (email: string, senha: string) => {
     const { data } = await apiUsers.get(url);
 
     if (data[0].senha === senha) {
-      // Accesso autorizado, armazenando Id e Nome do usuário no storeData
       await storeData("nome", data[0].nome);
       await storeData("id", data[0].id);
       await storeData("acessoAutorizado", 'OK');
@@ -67,10 +61,10 @@ export const checkLogin = async (email: string, senha: string) => {
     } else {
       Alert.alert("Email ou senha inválidos!");
     }
-    return
+    return;
   } catch (error) {
-    console.error("Erro ao verificar e-mail:", error);
-    return false; // Em caso de erro, não impede o cadastro
+    // console.error("Erro ao verificar e-mail:", error);
+    return false;
   }
 };
 
@@ -81,7 +75,7 @@ export const checkEmail = async (user: UserProps) => {
     const { data } = await apiUsers.get(url);
     return data.length > 0; // true se já existe
   } catch (error) {
-    console.error("Erro ao verificar e-mail:", error);
-    return false; // Em caso de erro, não impede o cadastro
+    // console.error("Erro ao verificar e-mail:", error);
+    return false;
   }
 };
