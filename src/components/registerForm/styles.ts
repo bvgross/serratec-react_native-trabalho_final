@@ -1,29 +1,37 @@
 import { StyleSheet } from "react-native";
-export const stylesCadastro = StyleSheet.create({
-  formContainer: {
-    width: "100%",
+
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
     alignItems: "center",
+    marginTop: 0,
+  },
+  formContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
     padding: 24,
-    backgroundColor: "transparent",
     gap: 15,
   },
   title: {
     color: "#fff",
     fontWeight: "bold",
-    fontSize: 22,
-    alignSelf: "flex-start",
-    marginBottom: 24,
+    fontSize: 32,
+    alignSelf: "center",
+    marginBottom: 34,
+    textAlign: "center",
   },
   inputRow: {
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "#60656f",
-    borderRadius: 6,
-    marginBottom: 14,
+    borderRadius: 5,
+
+    borderWidth: 3,
+    borderColor: "#949FA6",
     width: "100%",
-    paddingHorizontal: 12,
-    borderWidth: 1,
-    // borderColor: "#fff",
+    paddingHorizontal: 10,
   },
   inputIcon: {
     fontSize: 20,
@@ -32,31 +40,41 @@ export const stylesCadastro = StyleSheet.create({
   },
   input: {
     flex: 1,
-    // color: "red",
+    color: "#ffffff80",
     fontSize: 16,
     paddingVertical: 12,
+    paddingLeft: 25,
+    fontWeight: 400,
+  },
+  corPlaceHolder: {
+    color: "#fff",
+  },
+  registerButton: {
+    backgroundColor: "#bfc4c9",
+    borderRadius: 6,
+    paddingVertical: 12,
+    paddingHorizontal: 40,
+    marginTop: 20,
+    marginBottom: 18,
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    marginHorizontal: 150,
+  },
+  registerButtonText: {
+    color: "#222",
+    fontWeight: "bold",
+    fontSize: 16,
+    textAlign: "center",
   },
   bottomText: {
     color: "#bfc4c9",
     fontSize: 13,
-    marginTop: 10,
-    marginBottom: 10,
-    alignSelf: "center",
+    fontWeight: "bold",
   },
   loginLink: {
-    color: "#6c63ff",
+    color: "#bfc4c9",
+    fontSize: 13,
     textDecorationLine: "underline",
-  },
-  registerButton: {
-    backgroundColor: "#222",
-    borderRadius: 6,
-    paddingVertical: 12,
-    paddingHorizontal: 40,
-    marginTop: 10,
-  },
-  registerButtonText: {
-    color: "#fff",
-    fontWeight: "bold",
-    fontSize: 16,
   },
 });

@@ -1,12 +1,9 @@
-import { View } from "react-native";
-import Cadastro from "../cadastro";
+import { Text, View } from "react-native";
 
-const Home = () => {
+export const Home = () => {
   return (
     <View>
-      Página Home
+      <Text>Página Home</Text>
     </View>
   );
 };
-
-export default Home;
