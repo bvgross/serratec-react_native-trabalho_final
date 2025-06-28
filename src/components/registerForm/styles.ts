@@ -10,11 +10,12 @@ export const styles = StyleSheet.create({
   formContainer: {
     flex: 1,
     justifyContent: "center",
+    alignItems: "center",
     width: "100%",
     padding: 24,
     gap: 15,
   },
-  title : {
+  title: {
     color: "#fff",
     fontWeight: "bold",
     fontSize: 32,
@@ -56,7 +57,7 @@ export const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 18,
     width: "100%",
-    alignItems: "center", 
+    alignItems: "center",
     justifyContent: "center",
     marginHorizontal: 150,
   },
@@ -71,7 +72,7 @@ export const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: "bold",
   },
- loginLink: {
+  loginLink: {
     color: "#bfc4c9",
     fontSize: 13,
     textDecorationLine: "underline",

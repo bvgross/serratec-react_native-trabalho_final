@@ -77,7 +77,7 @@ const LoginForm = ({ loginType }: Props) => {
       </TouchableOpacity>
 
       <Text style={styles.bottomText}>Não tem uma conta?</Text>
-      <TouchableOpacity onPress={() => navigation.navigate("cadastro" as never)}>
+      <TouchableOpacity onPress={() => navigation.navigate("Cadastro" as never)}>
         <Text style={styles.register}>Registrar agora</Text>
       </TouchableOpacity>
 

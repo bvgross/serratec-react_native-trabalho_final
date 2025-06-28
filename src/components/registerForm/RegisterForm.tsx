@@ -6,8 +6,6 @@ import emailicon from "../../assets/iconesCadastro/emailicon.png";
 import calender from "../../assets/iconesCadastro/calender.png";
 import nacionalidadeIcon from "../../assets/iconesCadastro/nacionalidade.png";
 
-import { LinearGradient } from "expo-linear-gradient";
-
 import { styles } from "./styles";
 
 import { useNavigation } from "@react-navigation/native";
@@ -88,7 +86,7 @@ const RegisterForm = ({ registerType, loading }: Props) => {
           <TouchableOpacity
             onPress={() => navigation.navigate("Login" as never)}
           >
-            <Text style={stylesCadastro.loginLink}>Entrar</Text>
+            <Text style={styles.loginLink}>Entrar</Text>
           </TouchableOpacity>
         </Text>
         <TouchableOpacity
