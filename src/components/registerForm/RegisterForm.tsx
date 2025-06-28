@@ -95,20 +95,20 @@ const RegisterForm = ({ registerType, loading }: Props) => {
             onChangeText={setNacionalidade}
           />
         </View>
-        <Text style={styles.bottomText}>
-          Tem uma conta ?
-          <TouchableOpacity
-            onPress={() => navigation.navigate("Login" as never)}
-          >
-            <Text style={styles.loginLink}>Entrar</Text>
-          </TouchableOpacity>
-        </Text>
         <TouchableOpacity
           style={styles.registerButton}
           onPress={() => registerNewUser()}
           disabled={loading}
         >
           <Text style={styles.registerButtonText}>{loading ? "Registrando..." : "Registrar"}</Text>
+        </TouchableOpacity>
+        <Text style={styles.bottomText}>
+          Tem uma conta ?
+        </Text>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Login" as never)}
+        >
+          <Text style={styles.loginLink}>Entrar</Text>
         </TouchableOpacity>
       </View>
     </>

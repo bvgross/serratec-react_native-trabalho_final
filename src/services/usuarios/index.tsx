@@ -79,3 +79,192 @@ export const checkEmail = async (user: UserProps) => {
     return false;
   }
 };
+
+// API museu
+
+export interface listProps {
+  total: number,
+  objectsIDs: number[];
+}
+
+// export interface objectProps {
+//   objectID: number;
+//   title: string;
+//   objectName: string;
+//   department: string;
+//   culture?: string;
+//   period?: string;
+//   medium?: string;
+//   dimensions?: string;
+//   objectDate?: string;
+//
+//   primaryImage: string;
+//   primaryImageSmall: string;
+//   additionalImages?: string[];
+//
+//   artistDisplayName?: string;
+//   artistDisplayBio?: string;
+//   artistNationality?: string;
+//   artistBeginDate?: string;
+//   artistEndDate?: string;
+//
+//   measurements?: {
+//     elementName: string;
+//     elementMeasurements: {
+//       Height?: number;
+//       Width?: number;
+//       [key: string]: number | undefined;
+//     };
+//   }[];
+//
+//   tags?: {
+//     term: string;
+//     Wikidata_URL?: string;
+//   }[];
+//
+//   objectURL?: string;
+// }
+
+// Interface para constituintes (artistas, criadores)
+export interface Constituent {
+  constituentID: number;
+  role: string;
+  name: string;
+  constituentULAN_URL?: string;
+  constituentWikidata_URL?: string;
+  gender?: string;
+}
+
+// Interface para medidas dos elementos
+export interface ElementMeasurements {
+  Height?: number;
+  Width?: number;
+  Length?: number;
+  Depth?: number;
+  Diameter?: number;
+  [key: string]: number | undefined;
+}
+
+// Interface para medidas
+export interface Measurement {
+  elementName: string;
+  elementDescription?: string | null;
+  elementMeasurements: ElementMeasurements;
+}
+
+// Interface para tags
+export interface Tag {
+  term: string;
+  AAT_URL?: string;
+  Wikidata_URL?: string;
+}
+
+// Interface completa para objetos do museu
+export interface objectProps {
+  // Identificação básica
+  objectID: number;
+  isHighlight: boolean;
+  accessionNumber: string;
+  accessionYear: string;
+  isPublicDomain: boolean;
+
+  // Imagens
+  primaryImage: string;
+  primaryImageSmall: string;
+  additionalImages?: string[];
+
+  // Constituintes (artistas)
+  constituents?: Constituent[];
+
+  // Informações básicas do objeto
+  department: string;
+  objectName: string;
+  title: string;
+  culture?: string;
+  period?: string;
+  dynasty?: string;
+  reign?: string;
+  portfolio?: string;
+
+  // Informações do artista
+  artistRole?: string;
+  artistPrefix?: string;
+  artistDisplayName?: string;
+  artistDisplayBio?: string;
+  artistSuffix?: string;
+  artistAlphaSort?: string;
+  artistNationality?: string;
+  artistBeginDate?: string;
+  artistEndDate?: string;
+  artistGender?: string;
+  artistWikidata_URL?: string;
+  artistULAN_URL?: string;
+
+  // Data e período do objeto
+  objectDate?: string;
+  objectBeginDate?: number;
+  objectEndDate?: number;
+
+  // Características físicas
+  medium?: string;
+  dimensions?: string;
+  measurements?: Measurement[];
+
+  // Informações de crédito e proveniência
+  creditLine?: string;
+
+  // Geografia
+  geographyType?: string;
+  city?: string;
+  state?: string;
+  county?: string;
+  country?: string;
+  region?: string;
+  subregion?: string;
+  locale?: string;
+  locus?: string;
+  excavation?: string;
+  river?: string;
+
+  // Classificação e metadados
+  classification?: string;
+  rightsAndReproduction?: string;
+  linkResource?: string;
+  metadataDate?: string;
+  repository?: string;
+
+  // URLs e links
+  objectURL?: string;
+  objectWikidata_URL?: string;
+
+  // Tags e categorização
+  tags?: Tag[];
+
+  // Galeria
+  isTimelineWork?: boolean;
+  GalleryNumber?: string;
+
+  // Para flexibilidade com propriedades não mapeadas
+  [key: string]: any;
+}
+
+const apiMuseum = axios.create({
+  baseURL: "https://collectionapi.metmuseum.org/public/collection/v1/",
+});
+
+export const getMuseumObjects = () => {
+  const url = "objects";
+  return apiMuseum.get(url);
+};
+
+export const getMuseumObjectsByDepartmentId = (id: number):
+  Promise<AxiosResponse<listProps, any>> => {
+  const url = "objects?departmentIds=" + id;
+  return apiMuseum.get(url);
+};
+
+export const getMuseumObjectById = (id: number):
+  Promise<AxiosResponse<objectProps, any>> => {
+  const url = "objects/" + id;
+  return apiMuseum.get(url);
+};
