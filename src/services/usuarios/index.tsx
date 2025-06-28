@@ -38,7 +38,7 @@ export const postUsers = async (user: UserProps) => {
     }
     const response = await apiUsers.post("users", user);
     console.log("usuario cadastrado", response.data);
-    Alert.alert("Usuário cadastrado com sucesso! Seja bem vindo,");
+    Alert.alert("Bem vindo(a) " + response.data.nome + "!!! Cadastro realizado com sucesso!");
   } catch (error) {
     console.error("erro ao cadastrar:", error);
 

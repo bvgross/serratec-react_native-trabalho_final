@@ -25,6 +25,20 @@ const RegisterForm = ({ registerType, loading }: Props) => {
   const pontuacao = 0;
   const navigation = useNavigation();
 
+  function cleanFields() {
+    setNome("");
+    setSenha("");
+    setEmail("");
+    setData_nascimento("");
+    setNacionalidade("");
+  }
+
+  function registerNewUser() {
+    registerType(nome, senha, email, data_nascimento, nacionalidade, pontuacao);
+    cleanFields();
+    // Navegar para login ou Home
+  }
+
   return (
     <>
       <Text style={styles.title}>Registre-se</Text>
@@ -91,7 +105,7 @@ const RegisterForm = ({ registerType, loading }: Props) => {
         </Text>
         <TouchableOpacity
           style={styles.registerButton}
-          onPress={() => registerType(nome, senha, email, data_nascimento, nacionalidade, pontuacao)}
+          onPress={() => registerNewUser()}
           disabled={loading}
         >
           <Text style={styles.registerButtonText}>{loading ? "Registrando..." : "Registrar"}</Text>
