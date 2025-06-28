@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Switch, Image, Alert } from "react-native";
-import styles from "../../../styles";
+import styles from "./styles";
 import iconeLogin from "../../assets/iconesLogin/iconeLogin.png";
 import iconeLoginSenha from "../../assets/iconesLogin/iconeLoginSenha.png";
 import { checkLogin } from "../../services/usuarios";
 import { getData } from "../../utils/asyncStorage";
 import { useNavigation } from "@react-navigation/native";
+import Logo from "../logo";
 
 //typescript
 type Props = {
@@ -49,6 +50,7 @@ const LoginForm = ({ loginType }: Props) => {
   return (
     <>
       <View style={styles.loginContainer}>
+        <Text style={styles.title}>Entrar</Text>
         <View style={styles.inputRow}>
           <Image source={iconeLogin} style={styles.inputIcon} />
           <TextInput
@@ -86,12 +88,10 @@ const LoginForm = ({ loginType }: Props) => {
       <TouchableOpacity style={styles.loginButton} onPress={() => handlePress(email, senha)} disabled={loading}>
         <Text style={styles.loginButtonText}>{loading ? "Entrando..." : "Entrar"}</Text>
       </TouchableOpacity>
-      <Text style={styles.bottomText}>
-        Não tem conta?
-        <TouchableOpacity onPress={() => navigation.navigate("cadastro" as never)}>
-          <Text style={styles.register}>Registrar agora</Text>
-        </TouchableOpacity >
-      </Text>
+      <Text style={styles.bottomText}>Não tem uma conta?</Text>
+      <TouchableOpacity onPress={() => navigation.navigate("cadastro" as never)}>
+        <Text style={styles.register}>Registrar agora</Text>
+      </TouchableOpacity>
     </>
   );
 };

@@ -3,6 +3,9 @@ import { View, Alert } from "react-native";
 import RegisterForm from "../../components/registerForm/RegisterForm";
 import registerStyles from "./registerStyles";
 import { postUsers } from "../../services/usuarios";
+import Logo from "../../components/logo";
+import styles from "./registerStyles";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Cadastro = () => {
   const [loading, setLoading] = useState(false);
@@ -37,9 +40,20 @@ const Cadastro = () => {
   };
 
   return (
-    <View style={registerStyles.container}>
-      <RegisterForm registerType={Registro} loading={loading} />
-    </View>
+    <>
+      <LinearGradient
+        colors={["#404040", "#666D73"]}
+        start={{ x: 1, y: 0.6 }}
+        end={{ x: 0.8, y: 0 }}
+        style={styles.container}
+      >
+        <View style={styles.container}>
+          <Logo />
+
+          <RegisterForm registerType={Registro} loading={loading} />
+        </View>
+      </LinearGradient>
+    </>
   );
 };
 
