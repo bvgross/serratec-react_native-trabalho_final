@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    
+
     backgroundColor: "#404040",
     marginTop: 0,
   },
@@ -20,12 +20,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     width: "100%",
-   
     padding: 24,
     backgroundColor: "transparent",
     gap: 15,
   },
-  title : {
+  title: {
     color: "#fff",
     fontWeight: "bold",
     fontSize: 32,
@@ -99,7 +98,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: "bold",
   },
- 
+
 
   register: {
     color: "#bfc4c9",
@@ -108,10 +107,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 10,
     marginLeft: 5,
-    
-    
 
-    
+
+
+
 
   },
 });
