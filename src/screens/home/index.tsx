@@ -1,53 +1,26 @@
-import { Image, Text, View } from "react-native";
-import { getMuseumObjectById, getMuseumObjectsByDepartmentId, listProps, objectProps } from '../../services/museu';
-import { useEffect, useState } from 'react';
+import { Button, Image, Text, TouchableOpacity, View } from "react-native";
+import { useContext, useEffect, useState } from 'react';
 import { styles } from './styles';
+import { GameContext } from '../../context';
 
 export const Home = () => {
+
+  const { list, setMuseumList, object, setMuseumObject } = useContext(GameContext);
 
   //Escolher o departamento que quer consultar uma obra aleatória
   const department = 5;
 
   const [loading, setLoading] = useState(true);
-  const [list, setlist] = useState<listProps>({ total: 0, objectIDs: [] });
-  const [object, setObject] = useState<objectProps>();
 
-
-  //useEffect para baixar os ids das obras ao carregar a página
   useEffect(() => {
-    const fetchList = async () => {
-      try {
-        const response = await getMuseumObjectsByDepartmentId(department);
-        setlist(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchList();
+    //baixa os ids dos objetos do departamento usando uma função no context
+    setMuseumList(department);
   }, []);
 
-
-  //useEffect para pegar uma obra aleatória dessa lista carregada e exibir apenas as que tem imagem
   useEffect(() => {
-    if (list.objectIDs.length === 0) return;
-
-    const fetchObject = async () => {
-      const randomObjectId = list.objectIDs[Math.floor(Math.random() * list.objectIDs.length)];
-      try {
-        let object;
-        do {
-          const response = await getMuseumObjectById(randomObjectId);
-          object = response.data;
-        } while (object.primaryImage === null); //só sai do loop se tiver imagem cadastrada
-
-        setObject(object);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchObject();
+    //baixa um objeto de id aleatória do departamento selecionado em uma função no context
+    setMuseumObject();
+    setLoading(false); //diz que terminou de carregar o arquivo para poder exibir na tela
   }, [list]);
 
   if (loading) {
@@ -64,7 +37,8 @@ export const Home = () => {
       <Text>Cultura mãe do objeto: {object?.culture}</Text>
       <Text>Período: {object?.period ? object?.period : "Periodo desconhecido"}</Text>
       <Text>Nome do artista: {object?.artistDisplayName ? object?.artistDisplayName : "Artista desconhecido"}</Text>
-      <Image source={{ uri: object?.primaryImage }} style={{ width: 200, height: 200 }} />
+      <Image source={{ uri: object?.primaryImageSmall }} style={{ width: 300, height: 300 }} />
+      <TouchableOpacity onPress={setMuseumObject} style={styles.botao}><Text style={styles.text}>Randomizar</Text></TouchableOpacity>
     </View>
   );
 };
