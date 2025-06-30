@@ -38,4 +38,17 @@ export default StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    paddingTop: 40,
+  },
+
+  titulo: {
+    fontSize: 22,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 16,
+    color: "#333",
+  },
 });

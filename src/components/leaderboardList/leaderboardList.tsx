@@ -55,10 +55,13 @@ export const LeaderboardList = () => {
   }
 
   return (
-    <FlatList
-      data={leaderboardList}
-      keyExtractor={(_, index) => index.toString()}
-      renderItem={renderItem}
-    />
+    <View style={styles.container}>
+      <Text style={styles.titulo}>🏆 Ranking dos Top 10 Jogadores</Text>
+      <FlatList
+        data={leaderboardList}
+        keyExtractor={(_, index) => index.toString()}
+        renderItem={renderItem}
+      />
+    </View>
   );
 };
