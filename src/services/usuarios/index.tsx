@@ -15,6 +15,11 @@ export interface UserProps {
   pontuacao: number;
 }
 
+export const getUsers = async () => {
+  const response = await apiUsers.get("users");
+  return (response.data);
+}
+
 export const postUsers = async (user: UserProps) => {
   const url = "users";
 
