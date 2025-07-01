@@ -11,7 +11,7 @@ import { Home } from '../../screens/home';
 import { Leaderboard } from '../../screens/leaderboard';
 import { About } from '../../screens/about';
 import { Profile } from '../../screens/profile';
-import { Rules } from '../../screens/rules';
+import { RulesGame } from '../../screens/rulesGame';
 
 
 const Tab = createBottomTabNavigator<BottomTabsParamList>();
@@ -75,7 +75,7 @@ export function BottomTabs() {
       />
       <Tab.Screen
         name="Rules"
-        component={Rules}
+        component={RulesGame}
         options={{
           tabBarIcon: ({ color }) => (
             <Image
