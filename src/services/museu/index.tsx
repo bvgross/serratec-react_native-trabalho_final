@@ -120,3 +120,8 @@ export const getMuseumObjectById = (id: number):
   const url = "objects/" + id;
   return apiMuseum.get(url);
 };
+
+export const getMuseumDepartments = () => {
+  const url = "departments";
+  return apiMuseum.get(url);
+}

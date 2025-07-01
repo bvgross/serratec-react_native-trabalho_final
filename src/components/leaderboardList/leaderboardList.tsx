@@ -6,7 +6,7 @@ import {
   Alert,
   ActivityIndicator,
 } from "react-native";
-import styles from "./styles";
+import { styles } from "./styles";
 import { getUsers, UserProps } from "../../services/usuarios";
 
 export const LeaderboardList = () => {
@@ -32,7 +32,7 @@ export const LeaderboardList = () => {
     carregarLeaderboard();
   }, []);
 
-  const renderItem = ({ item, index }: { item: UserProps; index: number }) => {
+  const renderItem = ({ item, index }: { item: UserProps; index: number; }) => {
     const medalhas = ["🥇", "🥈", "🥉"];
     const posicao = index + 1;
     const marcador = index < 3 ? medalhas[index] : `${posicao}º`;

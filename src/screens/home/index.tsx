@@ -1,27 +1,40 @@
-import { Button, Image, Text, TouchableOpacity, View } from "react-native";
+import { Button, FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { useContext, useEffect, useState } from 'react';
 import { styles } from './styles';
+import { GameModal } from '../../components/Modals/GameModal';
 import { GameContext } from '../../context';
+import { getMuseumDepartments } from '../../services/museu';
+
+interface museumDepartmentProps {
+  // "departmentId": 1, "displayName": "American Decorative Arts"
+  departmentId: number,
+  displayName: string;
+}
 
 export const Home = () => {
 
-  const { list, setMuseumList, object, setMuseumObject } = useContext(GameContext);
-
-  //Escolher o departamento que quer consultar uma obra aleatória
-  const department = 5;
-
   const [loading, setLoading] = useState(true);
+  const [departments, setDepartments] = useState<museumDepartmentProps[]>([]);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [itemDepartmentId, setItemDepartmentId] = useState<number>(0);
+
+  const fetchDepartments = async () => {
+    const response = await getMuseumDepartments();
+    const departments = response.data.departments;
+    setDepartments(departments);
+  };
 
   useEffect(() => {
-    //baixa os ids dos objetos do departamento usando uma função no context
-    setMuseumList(department);
+    fetchDepartments();
+    setLoading(false);
   }, []);
 
-  useEffect(() => {
-    //baixa um objeto de id aleatória do departamento selecionado em uma função no context
-    setMuseumObject();
-    setLoading(false); //diz que terminou de carregar o arquivo para poder exibir na tela
-  }, [list]);
+  const handlePress = (departmentId: number) => {
+    setModalOpen(true);
+    setItemDepartmentId(departmentId);
+    console.log("TESTE", departmentId);
+
+  };
 
   if (loading) {
     return (
@@ -31,14 +44,22 @@ export const Home = () => {
     );
   } return (
     <View style={styles.container}>
-      <Text style={styles.temp}>Total de objetos do departamento "{object?.department}" é: {list.total}</Text>
+      <FlatList
+        data={departments}
+        keyExtractor={(_, index) => index.toString()}
+        renderItem={({ item }: { item: museumDepartmentProps; }) => {
+          return (
+            <TouchableOpacity style={styles.itemContainer} onPress={() => handlePress(item.departmentId)}>
+              <Text>{item.displayName}</Text>
+            </TouchableOpacity>
+          );
+        }}
+      />
+      {
+        modalOpen &&
+        <GameModal isItemDetailsModalOpen={modalOpen} selectedDepartmentId={itemDepartmentId} setModalOpen={setModalOpen} />
+      }
 
-      <Text>Id do objeto: {object?.objectID}</Text>
-      <Text>Cultura mãe do objeto: {object?.culture}</Text>
-      <Text>Período: {object?.period ? object?.period : "Periodo desconhecido"}</Text>
-      <Text>Nome do artista: {object?.artistDisplayName ? object?.artistDisplayName : "Artista desconhecido"}</Text>
-      <Image source={{ uri: object?.primaryImageSmall }} style={{ width: 300, height: 300 }} />
-      <TouchableOpacity onPress={setMuseumObject} style={styles.botao}><Text style={styles.text}>Randomizar</Text></TouchableOpacity>
     </View>
   );
 };
