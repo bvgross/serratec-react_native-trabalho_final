@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: "#f9f9f9",
+    backgroundColor: "#808080",
     padding: 12,
     marginVertical: 6,
     marginHorizontal: 16,
@@ -26,12 +26,12 @@ export const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     marginLeft: 10,
-    color: "#333",
+    color: "#fff",
   },
   pontuacao: {
     fontSize: 16,
     fontWeight: "600",
-    color: "#007AFF",
+    color: "#0477BF",
   },
   loadingContainer: {
     flex: 1,
@@ -49,6 +49,6 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     marginBottom: 16,
-    color: "#333",
+    color: "#fff",
   },
 });
