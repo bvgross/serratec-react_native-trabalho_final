@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { styles } from "./styles";
 import { getUsers, UserProps } from "../../services/usuarios";
+import { LinearGradient } from "expo-linear-gradient";
 
 export const LeaderboardList = () => {
   const [loading, setLoading] = useState(false);
@@ -49,19 +50,25 @@ export const LeaderboardList = () => {
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#007AFF" />
+        <ActivityIndicator size="large" color="#0477BF" />
       </View>
     );
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.titulo}>🏆 Ranking dos Top 10 Jogadores</Text>
-      <FlatList
-        data={leaderboardList}
-        keyExtractor={(_, index) => index.toString()}
-        renderItem={renderItem}
-      />
-    </View>
+    <LinearGradient
+      colors={["#666D73", "#404040"]}
+      start={{ x: 1, y: 0.6 }}
+      end={{ x: 0.8, y: 0 }}
+      style={styles.container}>
+      <View >
+        <Text style={styles.titulo}>🏆 Ranking dos Top 10 Jogadores</Text>
+        <FlatList
+          data={leaderboardList}
+          keyExtractor={(_, index) => index.toString()}
+          renderItem={renderItem}
+        />
+      </View>
+    </LinearGradient>
   );
 };

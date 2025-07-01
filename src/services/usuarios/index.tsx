@@ -17,8 +17,8 @@ export interface UserProps {
 
 export const getUsers = async () => {
   const response = await apiUsers.get("users");
-  return (response.data);
-}
+  return response.data;
+};
 
 export const postUsers = async (user: UserProps) => {
   const url = "users";
@@ -53,19 +53,24 @@ export const postUsers = async (user: UserProps) => {
 
 export const checkLogin = async (email: string, senha: string) => {
   const url = "users?email=" + email;
+
   console.log("dados inseridos", email, senha);
 
   try {
     const { data } = await apiUsers.get(url);
 
-    if (data[0].senha === senha) {
+    if (data.length > 0 && data[0].senha === senha) {
       await storeData("nome", data[0].nome);
       await storeData("id", data[0].id);
-      await storeData("acessoAutorizado", 'OK');
-      Alert.alert("Login realizado!", `Bem-vindo, ${await getData("nome")}!`);
+      await storeData("acessoAutorizado", "OK");
+      Alert.alert(`Login realizado! Bem-vindo, ${await getData("nome")}!`);
+      return true;
     } else {
+      await storeData("acessoAutorizado", "NO");
       Alert.alert("Email ou senha inválidos!");
+      return false;
     }
+
     return;
   } catch (error) {
     // console.error("Erro ao verificar e-mail:", error);
@@ -81,7 +86,6 @@ export const checkEmail = async (user: UserProps) => {
     return data.length > 0; // true se já existe
   } catch (error) {
     // console.error("Erro ao verificar e-mail:", error);
-    return false;
-  }
+    return false;
+  }
 };
-

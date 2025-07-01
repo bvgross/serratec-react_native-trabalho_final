@@ -25,12 +25,14 @@ const LoginForm = ({ loginType }: Props) => {
     setLoading(false);
 
     const autorizado = await getData("acessoAutorizado");
-    if (autorizado === "OK") {
+    console.log(autorizado);
+    console.log();
+
+    if (autorizado && autorizado === "OK") {
       navigation.navigate("Home" as never);
     } else {
-      Alert.alert("Erro", "Usuário não autorizado.");
+      // Alert.alert("Erro", "Usuário não autorizado.");
     }
-
   };
 
   return (
@@ -80,9 +82,8 @@ const LoginForm = ({ loginType }: Props) => {
       <TouchableOpacity onPress={() => navigation.navigate("Cadastro" as never)}>
         <Text style={styles.register}>Registrar agora</Text>
       </TouchableOpacity>
-
     </>
   );
 };
 
-export default LoginForm;
+export default LoginForm;
