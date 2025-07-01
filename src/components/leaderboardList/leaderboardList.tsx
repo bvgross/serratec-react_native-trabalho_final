@@ -37,7 +37,6 @@ export const LeaderboardList = () => {
     const medalhas = ["🥇", "🥈", "🥉"];
     const posicao = index + 1;
     const marcador = index < 3 ? medalhas[index] : `${posicao}º`;
-
     return (
       <View style={styles.itemContainer}>
         <Text style={styles.posicao}>{marcador}</Text>
