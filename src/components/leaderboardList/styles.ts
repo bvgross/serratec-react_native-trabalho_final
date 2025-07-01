@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    backgroundColor: "#808080",
+    backgroundColor: "#fff",
     padding: 12,
     marginVertical: 6,
     marginHorizontal: 16,
@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     marginLeft: 10,
-    color: "#fff",
+    color: "#000",
   },
   pontuacao: {
     fontSize: 16,
