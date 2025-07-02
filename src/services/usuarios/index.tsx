@@ -15,6 +15,21 @@ export interface UserProps {
   pontuacao: number;
 }
 
+export const putPontuacao = async (pontuacaoNova: number) => {
+  const id = await getData("id");
+  console.log(id);
+
+  const url = "users/" + id;
+  const object = { pontuacao: pontuacaoNova };
+
+  try {
+    const response = await apiUsers.put(url, object);
+    console.log("Resposta do PUT:", response.data);
+  } catch (error) {
+    console.error("Erro ao fazer PUT:", error);
+  }
+};
+
 export const getUsers = async () => {
   const response = await apiUsers.get("users");
   return response.data;
@@ -62,6 +77,9 @@ export const checkLogin = async (email: string, senha: string) => {
     if (data.length > 0 && data[0].senha === senha) {
       await storeData("nome", data[0].nome);
       await storeData("id", data[0].id);
+      const pontuacao = data[0].pontuacao;
+      await storeData("pontuacao", pontuacao.toString());
+
       await storeData("acessoAutorizado", "OK");
       Alert.alert(`Login realizado! Bem-vindo, ${await getData("nome")}!`);
       return true;
@@ -86,6 +104,6 @@ export const checkEmail = async (user: UserProps) => {
     return data.length > 0; // true se já existe
   } catch (error) {
     // console.error("Erro ao verificar e-mail:", error);
-    return false;
-  }
+    return false;
+  }
 };
