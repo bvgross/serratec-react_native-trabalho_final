@@ -4,6 +4,8 @@ import { styles } from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
 import { getData } from "../../utils/asyncStorage";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
+import userIcon from "../../assets/iconesGerais/user.png";
+import Logo from "../../components/logo";
 
 interface ProfileProps {
   nome: string;
@@ -39,20 +41,31 @@ export const Profile = () => {
         end={{ x: 0.8, y: 0 }}
         style={styles.container}
       >
+        <View style={styles.header}>
+          <View style={styles.avatar}>
+            <Image
+              source={userIcon}
+              style={{
+                width: 30,
+                height: 30,
+              }}
+            />
+          </View>
+          <Text style={styles.menuText}>{profile.nome} </Text>
+          <Text style={styles.menuText}>{profile.email} </Text>
+        </View>
+
         <View style={styles.menuContainer}>
           <TouchableOpacity style={styles.menuItem}>
-            <Text style={styles.menuText}>Nome: {profile.nome} </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.menuItem}>
-            <Text style={styles.menuText}>Email: {profile.email}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.menuItem}>
-            <Text style={styles.menuText}>Pontuação: {profile.pontuacao} </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.menuItem} onPress={() => navigation.navigate("Login" as never)}>
-            <Text>Sair</Text>
+            <Text style={styles.menuPontuacao}>Pontuação: {profile.pontuacao} </Text>
           </TouchableOpacity>
         </View>
+        <View style={styles.logo}>
+          <Logo />
+        </View>
+        <TouchableOpacity style={styles.logoutButton} onPress={() => navigation.navigate("Login" as never)}>
+          <Text style={styles.logoutText}>Sair</Text>
+        </TouchableOpacity>
       </LinearGradient>
     </>
   );
