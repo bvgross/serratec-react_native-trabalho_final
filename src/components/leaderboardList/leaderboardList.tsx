@@ -1,15 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  FlatList,
-  Alert,
-  ActivityIndicator,
-} from "react-native";
+import { View, Text, FlatList, Alert, ActivityIndicator } from "react-native";
 import { styles } from "./styles";
 import { getUsers, UserProps } from "../../services/usuarios";
 import { LinearGradient } from "expo-linear-gradient";
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect } from "@react-navigation/native";
 
 export const LeaderboardList = () => {
   const [loading, setLoading] = useState(false);
@@ -19,9 +13,7 @@ export const LeaderboardList = () => {
     setLoading(true);
     try {
       const hanking = await getUsers();
-      const top10 = hanking
-        .sort((a, b) => b.pontuacao - a.pontuacao)
-        .slice(0, 10);
+      const top10 = hanking.sort((a, b) => b.pontuacao - a.pontuacao).slice(0, 10);
       setLeaderboardList(top10);
     } catch (error) {
       Alert.alert("Erro", "Não foi possível carregar o ranking.");
@@ -40,7 +32,7 @@ export const LeaderboardList = () => {
     }, [])
   );
 
-  const renderItem = ({ item, index }: { item: UserProps; index: number; }) => {
+  const renderItem = ({ item, index }: { item: UserProps; index: number }) => {
     const medalhas = ["🥇", "🥈", "🥉"];
     const posicao = index + 1;
     const marcador = index < 3 ? medalhas[index] : `${posicao}º`;
@@ -66,14 +58,11 @@ export const LeaderboardList = () => {
       colors={["#666D73", "#404040"]}
       start={{ x: 1, y: 0.6 }}
       end={{ x: 0.8, y: 0 }}
-      style={styles.container}>
-      <View >
+      style={styles.container}
+    >
+      <View>
         <Text style={styles.titulo}>🏆 Ranking dos Top 10 Jogadores</Text>
-        <FlatList
-          data={leaderboardList}
-          keyExtractor={(_, index) => index.toString()}
-          renderItem={renderItem}
-        />
+        <FlatList data={leaderboardList} keyExtractor={(_, index) => index.toString()} renderItem={renderItem} />
       </View>
     </LinearGradient>
   );

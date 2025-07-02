@@ -2,24 +2,24 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#fff1e6',
+    flex: 1,
+    backgroundColor: "#fff1e6",
     padding: 20,
   },
   title: {
     fontSize: 28,
-    fontWeight: 'bold',
-    color: '#001858',
-    marginBottom: 20,
-    textAlign: 'center',
+    fontWeight: "bold",
+    color: "#f9f9f9",
+    textAlign: "center",
   },
   card: {
-    flexDirection: 'row',
-    backgroundColor: '#fef6e4',
+    flexDirection: "row",
+    backgroundColor: "#f9f9f9",
     borderRadius: 12,
     padding: 15,
     marginBottom: 15,
-    alignItems: 'center',
-    shadowColor: '#000',
+    alignItems: "center",
+    shadowColor: "#000",
     shadowOpacity: 0.1,
     shadowRadius: 5,
     elevation: 3,
@@ -35,16 +35,16 @@ export const styles = StyleSheet.create({
   },
   name: {
     fontSize: 18,
-    fontWeight: 'bold',
-    color: '#172c66',
+    fontWeight: "bold",
+    color: "#172c66",
   },
   role: {
     fontSize: 14,
-    color: '#f582ae',
+    color: "#f582ae",
     marginBottom: 5,
   },
   description: {
     fontSize: 13,
-    color: '#444',
+    color: "#444",
   },
-})
+});

@@ -15,18 +15,18 @@ interface GameContextType {
 }
 
 interface QuizProps {
-  pergunta: string,
-  respostaCerta: string,
-  respostaErrada: string,
+  pergunta: string;
+  respostaCerta: string;
+  respostaErrada: string;
   tipoPergunta: string;
 }
 
 export const GameContext = createContext<GameContextType>({
   list: { total: 0, objectIDs: [] },
-  setMuseumList: async () => { },
+  setMuseumList: async () => {},
   object: undefined,
   object2: undefined,
-  setMuseumObject: async () => { },
+  setMuseumObject: async () => {},
   loading: true,
 });
 
@@ -53,18 +53,18 @@ export const GameProvider = ({ children }: GameProviderProps) => {
     {
       pergunta: "Qual é o autor dessa obra?",
       tipopergunta: 0,
-      campoPergunta: "artistDisplayName"
+      campoPergunta: "artistDisplayName",
     },
     {
       pergunta: "Qual é a cultura dessa obra?",
       tipopergunta: 1,
-      campoPergunta: "culture"
+      campoPergunta: "culture",
     },
     {
       pergunta: "Qual é o período dessa obra?",
       tipopergunta: 2,
-      campoPergunta: "period"
-    }
+      campoPergunta: "period",
+    },
   ];
 
   const getPerguntaAleatoria = () => {
@@ -74,10 +74,6 @@ export const GameProvider = ({ children }: GameProviderProps) => {
   //baixar um objeto aleatório da lista
   const setMuseumObject = async (list: listProps) => {
     if (list.objectIDs.length === 0) return;
-
-    // let pergunta = getPerguntaAleatoria();
-    // let campoPergunta = pergunta.campoPergunta;
-    // console.log(campoPergunta);
 
     const getRandonObject = async () => {
       let object;
@@ -96,11 +92,7 @@ export const GameProvider = ({ children }: GameProviderProps) => {
           console.log(error);
           tentativas++;
         }
-      } while (
-        (!object?.primaryImageSmall ||
-          !object?.artistDisplayName) &&
-        tentativas < tentativasMaximas
-      );
+      } while ((!object?.primaryImageSmall || !object?.artistDisplayName) && tentativas < tentativasMaximas);
 
       if (!object?.primaryImageSmall || !object?.artistDisplayName) {
         return undefined;
@@ -113,10 +105,8 @@ export const GameProvider = ({ children }: GameProviderProps) => {
     const object2 = await getRandonObject();
 
     if (object?.primaryImageSmall && object2?.primaryImageSmall) {
-      console.log("setou um objeto");
       setObject(object);
       setObject2(object2);
-      console.log("funcionou");
 
       setLoading(false);
     } else {

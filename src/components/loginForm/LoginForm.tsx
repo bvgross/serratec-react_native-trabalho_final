@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Switch, Image, Alert } from "react-native";
 import styles from "./styles";
+import { storeData, removeData, getData } from "../../utils/asyncStorage";
 import iconeLogin from "../../assets/iconesLogin/iconeLogin.png";
 import iconeLoginSenha from "../../assets/iconesLogin/iconeLoginSenha.png";
 import { checkLogin } from "../../services/usuarios";
-import { getData } from "../../utils/asyncStorage";
 import { useNavigation } from "@react-navigation/native";
+import { useEffect } from "react";
 import Logo from "../logo";
 
 type Props = {
@@ -21,19 +22,60 @@ const LoginForm = ({ loginType }: Props) => {
 
   const handlePress = async (email: string, senha: string) => {
     setLoading(true);
-    await checkLogin(email, senha);
-    setLoading(false);
+    try {
+      await checkLogin(email, senha);
+      const autorizado = await getData("acessoAutorizado");
 
-    const autorizado = await getData("acessoAutorizado");
-    console.log(autorizado);
-    console.log();
 
-    if (autorizado && autorizado === "OK") {
-      navigation.navigate("Home" as never);
-    } else {
-      // Alert.alert("Erro", "Usuário não autorizado.");
+      if (autorizado === "OK") {
+        if (remember) {
+          await storeData("rememberedEmail", email);
+          await storeData("rememberedSenha", senha);
+        } else {
+          await removeData("rememberedEmail");
+          await removeData("rememberedSenha");
+        }
+
+        navigation.navigate("Home" as never);
+      } else {
+        Alert.alert("Erro", "Usuário não autorizado.");
+      }
+    } catch (error) {
+      Alert.alert("Erro", "Falha ao tentar fazer login.");
+    } finally {
+      setLoading(false);
     }
   };
+
+  // const handlePress = async (email: string, senha: string) => {
+  //   setLoading(true);
+  //   await checkLogin(email, senha);
+  //   setLoading(false);
+
+  //   const autorizado = await getData("acessoAutorizado");
+  //   console.log(autorizado);
+  //   console.log();
+
+  //   if (autorizado && autorizado === "OK") {
+  //     navigation.navigate("Home" as never);
+  //   } else {
+  //     // Alert.alert("Erro", "Usuário não autorizado.");
+  //   }
+  // };
+  useEffect(() => {
+    const loadRememberedData = async () => {
+      const savedEmail = await getData("rememberedEmail");
+      const savedSenha = await getData("rememberedSenha");
+
+      if (savedEmail && savedSenha) {
+        setEmail(savedEmail);
+        setSenha(savedSenha);
+        setRemember(true);
+      }
+    };
+
+    loadRememberedData();
+  }, []);
 
   return (
     <>
@@ -86,4 +128,5 @@ const LoginForm = ({ loginType }: Props) => {
   );
 };
 
-export default LoginForm;
+export default LoginForm;
+
