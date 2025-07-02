@@ -26,6 +26,7 @@ const LoginForm = ({ loginType }: Props) => {
       await checkLogin(email, senha);
       const autorizado = await getData("acessoAutorizado");
 
+
       if (autorizado === "OK") {
         if (remember) {
           await storeData("rememberedEmail", email);
@@ -128,3 +129,4 @@ const LoginForm = ({ loginType }: Props) => {
 };
 
 export default LoginForm;
+
