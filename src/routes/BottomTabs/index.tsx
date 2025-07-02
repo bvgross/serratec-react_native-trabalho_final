@@ -9,7 +9,7 @@ import AboutIcon from '../../assets/iconesNavigator/AboutIcon.png';
 import RulesIcon from '../../assets/iconesNavigator/RulesIcon.png';
 import { Home } from '../../screens/home';
 import { Leaderboard } from '../../screens/leaderboard';
-import { About } from '../../screens/about';
+import About from '../../screens/about';
 import { Profile } from '../../screens/profile';
 import { RulesGame } from '../../screens/rulesGame';
 
