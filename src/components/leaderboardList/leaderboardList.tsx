@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -9,6 +9,7 @@ import {
 import { styles } from "./styles";
 import { getUsers, UserProps } from "../../services/usuarios";
 import { LinearGradient } from "expo-linear-gradient";
+import { useFocusEffect } from '@react-navigation/native';
 
 export const LeaderboardList = () => {
   const [loading, setLoading] = useState(false);
@@ -29,9 +30,15 @@ export const LeaderboardList = () => {
     }
   };
 
-  useEffect(() => {
-    carregarLeaderboard();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      // Sua lógica de recarregamento aqui
+      carregarLeaderboard();
+      return () => {
+        // opcional: cleanup
+      };
+    }, [])
+  );
 
   const renderItem = ({ item, index }: { item: UserProps; index: number; }) => {
     const medalhas = ["🥇", "🥈", "🥉"];
