@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Modal, View, Text, ActivityIndicator, ScrollView, TouchableOpacity, Image, Alert } from "react-native";
-import { styles } from "./styles";
-import CloseIcon from "../../../assets/iconesGerais/CloseIcon.png";
-import { GameContext } from "../../../context";
 import { LinearGradient } from "expo-linear-gradient";
-import { getData, storeData } from '../../../utils/asyncStorage';
+import React, { useContext, useEffect, useState } from "react";
+import { Alert, Image, Modal, Text, TouchableOpacity, View } from "react-native";
+import { GameContext } from "../../../context";
 import { putPontuacao } from '../../../services/usuarios';
+import { getData, storeData } from '../../../utils/asyncStorage';
+import { styles } from "./styles";
 
 interface ItemDetailsModal {
   isItemDetailsModalOpen: boolean;
@@ -15,9 +14,6 @@ interface ItemDetailsModal {
 
 export const GameModal = ({ isItemDetailsModalOpen, selectedDepartmentId, setModalOpen }: ItemDetailsModal) => {
   const { list, setMuseumList, object, object2, setMuseumObject, loading } = useContext(GameContext);
-
-  //Escolher o departamento que quer consultar uma obra aleatória
-
   const [department, setDepartMent] = useState<number>(selectedDepartmentId);
   const [pontuacao, setPontuacao] = useState<number>(0);
   const [vidas, setVidas] = useState<number>(3);
@@ -101,7 +97,7 @@ export const GameModal = ({ isItemDetailsModalOpen, selectedDepartmentId, setMod
               <Text style={styles.text}>Vidas: {vidas}</Text>
               <Text style={styles.text}>Pontuação: {pontuacao}</Text>
               <Text style={styles.text}>Qual é o autor dessa obra?</Text>
-              <Image source={{ uri: object?.primaryImageSmall }} style={{ width: 290, height: 350 }} />
+              <Image source={{ uri: object?.primaryImageSmall }} style={{ width: 270, height: 350 }} />
               <TouchableOpacity onPress={() => handlePress(resposta1)} style={styles.botao}>
                 <Text style={styles.text}>{resposta1}</Text>
               </TouchableOpacity>

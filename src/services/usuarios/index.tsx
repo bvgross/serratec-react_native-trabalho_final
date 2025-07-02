@@ -86,9 +86,7 @@ export const checkLogin = async (email: string, senha: string) => {
       return false;
     }
 
-    return;
   } catch (error) {
-    // console.error("Erro ao verificar e-mail:", error);
     return false;
   }
 };
@@ -100,7 +98,6 @@ export const checkEmail = async (user: UserProps) => {
     const { data } = await apiUsers.get(url);
     return data.length > 0; // true se já existe
   } catch (error) {
-    // console.error("Erro ao verificar e-mail:", error);
     return false;
   }
 };

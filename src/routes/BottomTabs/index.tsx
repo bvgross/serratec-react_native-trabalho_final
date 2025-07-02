@@ -1,15 +1,13 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Image } from "react-native";
-import CartIcon from "../../assets/iconesNavigator/CartIcon.png";
-import ShopIcon from "../../assets/iconesNavigator/CartIcon.png";
+import AboutIcon from "../../assets/iconesNavigator/AboutIcon.png";
 import GameIcon from "../../assets/iconesNavigator/GameIcon.png";
 import leaderboardIcon from "../../assets/iconesNavigator/leaderboardIcon.png";
 import ProfileIcon from "../../assets/iconesNavigator/ProfileIcon.png";
-import AboutIcon from "../../assets/iconesNavigator/AboutIcon.png";
 import RulesIcon from "../../assets/iconesNavigator/RulesIcon.png";
+import About from "../../screens/about";
 import { Home } from "../../screens/home";
 import { Leaderboard } from "../../screens/leaderboard";
-import About from "../../screens/about";
 import { Profile } from "../../screens/profile";
 import { RulesGame } from "../../screens/rulesGame";
 

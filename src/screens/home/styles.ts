@@ -7,8 +7,6 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     paddingTop: 30,
   },
-  temp: {
-  },
   botao: {
     marginTop: 30,
     backgroundColor: "#55a",

@@ -17,7 +17,6 @@ export const Login = () => {
       >
         <View style={styles.container}>
           <Logo />
-
           <LoginForm loginType={Login} />
         </View>
       </LinearGradient>

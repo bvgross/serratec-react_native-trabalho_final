@@ -1,9 +1,9 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { View, Text, FlatList, Alert, ActivityIndicator } from "react-native";
-import { styles } from "./styles";
-import { getUsers, UserProps } from "../../services/usuarios";
-import { LinearGradient } from "expo-linear-gradient";
 import { useFocusEffect } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
+import React, { useCallback, useState } from "react";
+import { ActivityIndicator, Alert, FlatList, Text, View } from "react-native";
+import { getUsers, UserProps } from "../../services/usuarios";
+import { styles } from "./styles";
 
 export const LeaderboardList = () => {
   const [loading, setLoading] = useState(false);
@@ -24,10 +24,8 @@ export const LeaderboardList = () => {
 
   useFocusEffect(
     useCallback(() => {
-      // Sua lógica de recarregamento aqui
       carregarLeaderboard();
       return () => {
-        // opcional: cleanup
       };
     }, [])
   );

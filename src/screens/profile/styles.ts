@@ -6,11 +6,8 @@ export const styles = StyleSheet.create({
     backgroundColor: "#f5f5f5",
   },
   header: {
-    // backgroundColor: "#fff",
     padding: 20,
     alignItems: "center",
-    // borderBottomWidth: 10,
-    // borderBottomColor: "red",
   },
   avatar: {
     backgroundColor: "#e2e2e2",
@@ -38,8 +35,6 @@ export const styles = StyleSheet.create({
     backgroundColor: "#fff",
     paddingVertical: 15,
     paddingHorizontal: 20,
-    // borderBottomWidth: 1,
-    // borderBottomColor: "#eee",
   },
   menuText: {
     fontSize: 18,
