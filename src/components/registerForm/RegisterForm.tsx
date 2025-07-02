@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
+import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
+import calender from "../../assets/iconesCadastro/calender.png";
+import emailicon from "../../assets/iconesCadastro/emailicon.png";
+import nacionalidadeIcon from "../../assets/iconesCadastro/nacionalidade.png";
 import iconeLogin from "../../assets/iconesLogin/iconeLogin.png";
 import iconeLoginSenha from "../../assets/iconesLogin/iconeLoginSenha.png";
-import emailicon from "../../assets/iconesCadastro/emailicon.png";
-import calender from "../../assets/iconesCadastro/calender.png";
-import nacionalidadeIcon from "../../assets/iconesCadastro/nacionalidade.png";
 
 import { styles } from "./styles";
 

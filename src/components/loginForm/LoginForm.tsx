@@ -1,13 +1,11 @@
-import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Switch, Image, Alert } from "react-native";
-import styles from "./styles";
-import { storeData, removeData, getData } from "../../utils/asyncStorage";
+import { useNavigation } from "@react-navigation/native";
+import React, { useEffect, useState } from "react";
+import { Alert, Image, Switch, Text, TextInput, TouchableOpacity, View } from "react-native";
 import iconeLogin from "../../assets/iconesLogin/iconeLogin.png";
 import iconeLoginSenha from "../../assets/iconesLogin/iconeLoginSenha.png";
 import { checkLogin } from "../../services/usuarios";
-import { useNavigation } from "@react-navigation/native";
-import { useEffect } from "react";
-import Logo from "../logo";
+import { getData, removeData, storeData } from "../../utils/asyncStorage";
+import styles from "./styles";
 
 type Props = {
   loginType: (nome: string, senha: string) => void;
@@ -47,21 +45,6 @@ const LoginForm = ({ loginType }: Props) => {
     }
   };
 
-  // const handlePress = async (email: string, senha: string) => {
-  //   setLoading(true);
-  //   await checkLogin(email, senha);
-  //   setLoading(false);
-
-  //   const autorizado = await getData("acessoAutorizado");
-  //   console.log(autorizado);
-  //   console.log();
-
-  //   if (autorizado && autorizado === "OK") {
-  //     navigation.navigate("Home" as never);
-  //   } else {
-  //     // Alert.alert("Erro", "Usuário não autorizado.");
-  //   }
-  // };
   useEffect(() => {
     const loadRememberedData = async () => {
       const savedEmail = await getData("rememberedEmail");

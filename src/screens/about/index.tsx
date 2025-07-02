@@ -1,14 +1,14 @@
+import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
-import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
-import { styles } from "./styles";
+import { Image, ScrollView, Text, View } from "react-native";
 import brunoFoto from "../../assets/equipeFotos/brunoFoto.png";
 import danielFoto from "../../assets/equipeFotos/danielFoto.png";
 import joseFoto from "../../assets/equipeFotos/JoseFoto.png";
 import marlosFoto from "../../assets/equipeFotos/marlosFoto.png";
 import mateusFoto from "../../assets/equipeFotos/mateusFoto.png";
 import pauloFoto from "../../assets/equipeFotos/pauloFoto.png";
-import { LinearGradient } from "expo-linear-gradient";
 import groupIcon from "../../assets/iconesGerais/people.png";
+import { styles } from "./styles";
 
 const teamMembers = [
   {
@@ -61,7 +61,6 @@ export default function About() {
       <ScrollView>
         <View
           style={{
-            // backgroundColor: "red",
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "row",
@@ -73,8 +72,6 @@ export default function About() {
           <Image
             source={groupIcon}
             style={{
-              // backgroundColor: "blue",
-              // alignSelf:
               tintColor: "#fef6e4",
               width: 30,
               height: 30,
