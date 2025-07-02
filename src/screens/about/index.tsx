@@ -30,7 +30,7 @@ const teamMembers = [
   {
     name: 'Marlos Bianna',
     role: 'Desenvolvedor Backend',
-    description: ' .',
+    description: 'Developer Full Stack and Production Engeenier.',
     image: marlosFoto,
   },
   {
