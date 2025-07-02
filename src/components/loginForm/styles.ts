@@ -1,4 +1,3 @@
-import { CurrentRenderContext } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   dividerRow: {
@@ -31,7 +30,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     borderRadius: 5,
-    // marginBottom: 14,
     borderWidth: 3,
     borderColor: "#949FA6",
     width: "100%",
@@ -90,8 +88,6 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: "bold",
   },
-
-
   register: {
     color: "#bfc4c9",
     fontSize: 13,
@@ -99,11 +95,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 10,
     marginLeft: 5,
-
-
-
-
-
   },
 });
 

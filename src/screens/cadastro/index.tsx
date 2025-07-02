@@ -1,11 +1,10 @@
-import React, { useState } from "react";
-import { View } from "react-native";
-import RegisterForm from "../../components/registerForm/RegisterForm";
-import registerStyles from "./registerStyles";
-import { postUsers } from "../../services/usuarios";
-import Logo from "../../components/logo";
-import styles from "./registerStyles";
 import { LinearGradient } from "expo-linear-gradient";
+import React from "react";
+import { View } from "react-native";
+import Logo from "../../components/logo";
+import RegisterForm from "../../components/registerForm/RegisterForm";
+import { postUsers } from "../../services/usuarios";
+import styles from "./registerStyles";
 
 export const Cadastro = () => {
 

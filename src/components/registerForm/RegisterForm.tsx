@@ -1,18 +1,24 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
+import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
+import calender from "../../assets/iconesCadastro/calender.png";
+import emailicon from "../../assets/iconesCadastro/emailicon.png";
+import nacionalidadeIcon from "../../assets/iconesCadastro/nacionalidade.png";
 import iconeLogin from "../../assets/iconesLogin/iconeLogin.png";
 import iconeLoginSenha from "../../assets/iconesLogin/iconeLoginSenha.png";
-import emailicon from "../../assets/iconesCadastro/emailicon.png";
-import calender from "../../assets/iconesCadastro/calender.png";
-import nacionalidadeIcon from "../../assets/iconesCadastro/nacionalidade.png";
 
 import { styles } from "./styles";
 
 import { useNavigation } from "@react-navigation/native";
 
-
 type Props = {
-  registerType: (nome: string, email: string, dataNascimento: string, nacionalidade: string, senha: string, pontuacao: number) => void;
+  registerType: (
+    nome: string,
+    email: string,
+    dataNascimento: string,
+    nacionalidade: string,
+    senha: string,
+    pontuacao: number
+  ) => void;
   loading: boolean;
 };
 
@@ -36,6 +42,7 @@ const RegisterForm = ({ registerType, loading }: Props) => {
   function registerNewUser() {
     registerType(nome, senha, email, data_nascimento, nacionalidade, pontuacao);
     cleanFields();
+    navigation.navigate("Login" as never);
     // Navegar para login ou Home
   }
 
@@ -95,19 +102,11 @@ const RegisterForm = ({ registerType, loading }: Props) => {
             onChangeText={setNacionalidade}
           />
         </View>
-        <TouchableOpacity
-          style={styles.registerButton}
-          onPress={() => registerNewUser()}
-          disabled={loading}
-        >
+        <TouchableOpacity style={styles.registerButton} onPress={() => registerNewUser()} disabled={loading}>
           <Text style={styles.registerButtonText}>{loading ? "Registrando..." : "Registrar"}</Text>
         </TouchableOpacity>
-        <Text style={styles.bottomText}>
-          Tem uma conta ?
-        </Text>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Login" as never)}
-        >
+        <Text style={styles.bottomText}>Tem uma conta ?</Text>
+        <TouchableOpacity onPress={() => navigation.navigate("Login" as never)}>
           <Text style={styles.loginLink}>Entrar</Text>
         </TouchableOpacity>
       </View>
