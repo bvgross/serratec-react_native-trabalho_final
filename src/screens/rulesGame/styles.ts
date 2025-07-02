@@ -2,32 +2,34 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   container: {
+    flex: 1,
     padding: 20,
-    backgroundColor: '#fff',
+    // backgroundColor: "#fff",
   },
   title: {
-    fontSize: 26,
-    fontWeight: 'bold',
+    fontSize: 30,
+    fontWeight: "bold",
     marginBottom: 20,
-    textAlign: 'center',
+    textAlign: "center",
+    color: "#fff",
   },
   sectionTitle: {
-    fontSize: 18,
-    fontWeight: '600',
+    fontSize: 23,
+    fontWeight: "600",
     marginTop: 15,
     marginBottom: 5,
+    color: "#fff",
   },
   text: {
-    fontSize: 16,
+    fontSize: 18,
     lineHeight: 24,
-    color: '#333',
+    color: "#fff",
   },
   footer: {
     marginTop: 30,
     fontSize: 16,
-    fontStyle: 'italic',
-    textAlign: 'center',
-    color: '#555',
+    fontStyle: "italic",
+    textAlign: "center",
+    color: "#fff",
   },
 });
-
