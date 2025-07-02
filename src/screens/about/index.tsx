@@ -30,6 +30,7 @@ const teamMembers = [
     image: joseFoto,
   },
   {
+
     name: "Marlos Bianna",
     role: "Desenvolvedor Backend",
     description: "github.com/biannamarlos",
