@@ -19,6 +19,28 @@ export const Home = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [itemDepartmentId, setItemDepartmentId] = useState<number>(0);
 
+  // const perguntas = [
+  //   {
+  //     pergunta: "Qual é o autor dessa obra?",
+  //     tipopergunta: 0,
+  //     campoPergunta: "artistDisplayName"
+  //   },
+  //   {
+  //     pergunta: "Qual é a cultura dessa obra?",
+  //     tipopergunta: 1,
+  //     campoPergunta: "culture"
+  //   },
+  //   {
+  //     pergunta: "Qual é o período dessa obra?",
+  //     tipopergunta: 2,
+  //     campoPergunta: "period"
+  //   }
+  // ];
+  //
+  // const getPerguntaAleatoria = () => {
+  //   return perguntas[Math.floor(Math.random() * perguntas.length)];
+  // };
+
   const fetchDepartments = async () => {
     const response = await getMuseumDepartments();
     const departments = response.data.departments;

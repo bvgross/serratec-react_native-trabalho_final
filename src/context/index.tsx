@@ -14,12 +14,19 @@ interface GameContextType {
   loading: boolean;
 }
 
+interface QuizProps {
+  pergunta: string,
+  respostaCerta: string,
+  respostaErrada: string,
+  tipoPergunta: string;
+}
+
 export const GameContext = createContext<GameContextType>({
   list: { total: 0, objectIDs: [] },
-  setMuseumList: async () => {},
+  setMuseumList: async () => { },
   object: undefined,
   object2: undefined,
-  setMuseumObject: async () => {},
+  setMuseumObject: async () => { },
   loading: true,
 });
 
@@ -28,6 +35,7 @@ export const GameProvider = ({ children }: GameProviderProps) => {
   const [object, setObject] = useState<objectProps>();
   const [object2, setObject2] = useState<objectProps>();
   const [loading, setLoading] = useState<boolean>(true);
+  const [pergunta, setPergunta] = useState<QuizProps>();
 
   //baixar os ids das obas ao carregar a página
   const setMuseumList = async (department: number) => {
@@ -41,15 +49,45 @@ export const GameProvider = ({ children }: GameProviderProps) => {
     }
   };
 
+  const perguntas = [
+    {
+      pergunta: "Qual é o autor dessa obra?",
+      tipopergunta: 0,
+      campoPergunta: "artistDisplayName"
+    },
+    {
+      pergunta: "Qual é a cultura dessa obra?",
+      tipopergunta: 1,
+      campoPergunta: "culture"
+    },
+    {
+      pergunta: "Qual é o período dessa obra?",
+      tipopergunta: 2,
+      campoPergunta: "period"
+    }
+  ];
+
+  const getPerguntaAleatoria = () => {
+    return perguntas[Math.floor(Math.random() * perguntas.length)];
+  };
+
   //baixar um objeto aleatório da lista
   const setMuseumObject = async (list: listProps) => {
     if (list.objectIDs.length === 0) return;
+
+    // let pergunta = getPerguntaAleatoria();
+    // let campoPergunta = pergunta.campoPergunta;
+    // console.log(campoPergunta);
+
     const getRandonObject = async () => {
       let object;
       let tentativas = 0;
+
       const tentativasMaximas = 10;
+
       do {
         const randomObjectId = list.objectIDs[Math.floor(Math.random() * list.objectIDs.length)];
+
         try {
           const response = await getMuseumObjectById(randomObjectId);
           object = response.data;
@@ -59,18 +97,20 @@ export const GameProvider = ({ children }: GameProviderProps) => {
           tentativas++;
         }
       } while (
-        !object?.primaryImageSmall ||
-        !object?.culture?.trim() ||
-        !object?.artistDisplayName?.trim() ||
-        !object?.period?.trim() ||
+        (!object?.primaryImageSmall ||
+          !object?.artistDisplayName) &&
         tentativas < tentativasMaximas
       );
+
+      if (!object?.primaryImageSmall || !object?.artistDisplayName) {
+        return undefined;
+      }
+
       return object;
     };
+
     const object = await getRandonObject();
     const object2 = await getRandonObject();
-    console.log(object);
-    console.log(object2);
 
     if (object?.primaryImageSmall && object2?.primaryImageSmall) {
       console.log("setou um objeto");
@@ -80,7 +120,7 @@ export const GameProvider = ({ children }: GameProviderProps) => {
 
       setLoading(false);
     } else {
-      console.log("Não foi possível encontrar um objeto com imagem");
+      console.log("Não foi possível encontrar um objeto com imagem e outra caracteristica");
     }
   };
 

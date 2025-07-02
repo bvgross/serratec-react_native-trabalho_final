@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Modal, View, Text, ActivityIndicator, ScrollView, TouchableOpacity, Image } from "react-native";
+import { Modal, View, Text, ActivityIndicator, ScrollView, TouchableOpacity, Image, Alert } from "react-native";
 import { styles } from "./styles";
 import CloseIcon from "../../../assets/iconesGerais/CloseIcon.png";
 import { GameContext } from "../../../context";
 import { LinearGradient } from "expo-linear-gradient";
+import { getData, storeData } from '../../../utils/asyncStorage';
+import { putPontuacao } from '../../../services/usuarios';
 
 interface ItemDetailsModal {
   isItemDetailsModalOpen: boolean;
@@ -17,6 +19,8 @@ export const GameModal = ({ isItemDetailsModalOpen, selectedDepartmentId, setMod
   //Escolher o departamento que quer consultar uma obra aleatória
 
   const [department, setDepartMent] = useState<number>(selectedDepartmentId);
+  const [pontuacao, setPontuacao] = useState<number>(0);
+  const [vidas, setVidas] = useState<number>(3);
 
   useEffect(() => {
     //baixa os ids dos objetos do departamento usando uma função no context
@@ -30,6 +34,53 @@ export const GameModal = ({ isItemDetailsModalOpen, selectedDepartmentId, setMod
   const randomizeModal = () => {
     setMuseumObject(list);
   };
+
+  const respostas = [object?.artistDisplayName, object2?.artistDisplayName];
+  const resposta1 = respostas[Math.floor(Math.random() * respostas.length)];
+  let resposta2;
+  if (resposta1 === respostas[0]) {
+    resposta2 = respostas[1];
+  } else {
+    resposta2 = respostas[0];
+  }
+
+
+  const handlePress = (resposta: string | undefined) => {
+    if (resposta == respostas[0]) {
+      Alert.alert("Acertou");
+      //adicionar um ponto
+      setPontuacao(pontuacao + 1);
+    } else {
+      Alert.alert("Errou");
+      //retirar uma vida
+      setVidas(vidas - 1);
+    }
+    setMuseumObject(list);
+  };
+
+  const getPontuacaoAtual = async () => {
+    const pontuacao = Number(await getData("pontuacao"));
+    return pontuacao;
+  };
+
+  useEffect(() => {
+    if (vidas === 0) {
+      Alert.alert("Game over! Você fez: " + pontuacao + " pontos!");
+      setVidas(3);
+      setPontuacao(0);
+
+      const verificarPontuacao = async () => {
+        const pontuacaoAtual = await getPontuacaoAtual();
+
+        if (pontuacao > pontuacaoAtual) {
+          storeData("pontuacao", pontuacao.toString());
+          putPontuacao(pontuacao);
+        }
+      };
+
+      verificarPontuacao(); // chama a função assíncrona
+    }
+  }, [vidas]);
 
   return (
     <Modal animationType="fade" transparent={true} visible={isItemDetailsModalOpen} onRequestClose={closeModal}>
@@ -46,13 +97,15 @@ export const GameModal = ({ isItemDetailsModalOpen, selectedDepartmentId, setMod
             style={styles.modalContainer}
           >
             <View>
-              <Text style={styles.text}>Qual a cultura desta obra?</Text>
+              <Text style={styles.text}>Vidas: {vidas}</Text>
+              <Text style={styles.text}>Pontuação: {pontuacao}</Text>
+              <Text style={styles.text}>Qual é o autor dessa obra?</Text>
               <Image source={{ uri: object?.primaryImageSmall }} style={{ width: 290, height: 350 }} />
-              <TouchableOpacity onPress={() => setMuseumObject(list)} style={styles.botao}>
-                <Text style={styles.text}>{object?.artistDisplayName}</Text>
+              <TouchableOpacity onPress={() => handlePress(resposta1)} style={styles.botao}>
+                <Text style={styles.text}>{resposta1}</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={() => setMuseumObject(list)} style={styles.botao}>
-                <Text style={styles.text}>{object2?.culture}</Text>
+              <TouchableOpacity onPress={() => handlePress(resposta2)} style={styles.botao}>
+                <Text style={styles.text}>{resposta2}</Text>
               </TouchableOpacity>
             </View>
           </LinearGradient>
