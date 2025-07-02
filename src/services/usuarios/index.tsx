@@ -17,14 +17,12 @@ export interface UserProps {
 
 export const putPontuacao = async (pontuacaoNova: number) => {
   const id = await getData("id");
-  console.log(id);
 
   const url = "users/" + id;
   const object = { pontuacao: pontuacaoNova };
 
   try {
     const response = await apiUsers.put(url, object);
-    console.log("Resposta do PUT:", response.data);
   } catch (error) {
     console.error("Erro ao fazer PUT:", error);
   }
@@ -57,8 +55,8 @@ export const postUsers = async (user: UserProps) => {
       return;
     }
     const response = await apiUsers.post("users", user);
-    console.log("usuario cadastrado", response.data);
-    Alert.alert("Bem vindo(a) " + response.data.nome + "!!! Cadastro realizado com sucesso!");
+
+    Alert.alert("Cadastro realizado com sucesso!");
   } catch (error) {
     console.error("erro ao cadastrar:", error);
 
@@ -69,13 +67,12 @@ export const postUsers = async (user: UserProps) => {
 export const checkLogin = async (email: string, senha: string) => {
   const url = "users?email=" + email;
 
-  console.log("dados inseridos", email, senha);
-
   try {
     const { data } = await apiUsers.get(url);
 
     if (data.length > 0 && data[0].senha === senha) {
       await storeData("nome", data[0].nome);
+      await storeData("email", data[0].email);
       await storeData("id", data[0].id);
       const pontuacao = data[0].pontuacao;
       await storeData("pontuacao", pontuacao.toString());

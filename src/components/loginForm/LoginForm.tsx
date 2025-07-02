@@ -25,8 +25,6 @@ const LoginForm = ({ loginType }: Props) => {
     setLoading(false);
 
     const autorizado = await getData("acessoAutorizado");
-    console.log(autorizado);
-    console.log();
 
     if (autorizado && autorizado === "OK") {
       navigation.navigate("Home" as never);
@@ -86,4 +84,4 @@ const LoginForm = ({ loginType }: Props) => {
   );
 };
 
-export default LoginForm;
+export default LoginForm;
