@@ -75,6 +75,7 @@ export const GameModal = ({ isItemDetailsModalOpen, selectedDepartmentId, setMod
         if (pontuacao > pontuacaoAtual) {
           storeData("pontuacao", pontuacao.toString());
           putPontuacao(pontuacao);
+
         }
       };
 
